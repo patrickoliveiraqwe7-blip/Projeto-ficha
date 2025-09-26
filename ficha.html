@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Ficha One Piece · Estilo D&D 5e</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="toolbar" role="toolbar" aria-label="Controles da ficha">
+    <div class="wrap">
+      <button class="btn" id="saveBtn" title="Salvar localmente">Salvar</button>
+      <button class="btn" id="loadBtn" title="Carregar último save">Carregar</button>
+      <button class="btn ghost" id="resetBtn" title="Limpar campos">Limpar</button>
+
+      <button class="btn ghost" id="exportJsonBtn" title="Exportar ficha (.json)">Exportar .json</button>
+      <label class="btn ghost" for="importJsonFile" title="Importar ficha (.json)" style="cursor:pointer">Importar .json</label>
+      <input id="importJsonFile" type="file" accept="application/json" style="display:none">
+
+      <div class="spacer" aria-hidden="true"></div>
+
+      <label class="muted" style="margin-right:6px;display:flex;align-items:center;gap:6px;">
+        <input type="checkbox" id="autoCalc" checked aria-label="Cálculo automático" /> Cálculo automático (5e)
+      </label>
+
+      <div class="switches" role="tablist" aria-label="Temas visuais">
+        <button class="btn" data-theme="" role="tab" aria-selected="true">Pergaminho</button>
+        <button class="btn alt" data-theme="wood" role="tab">Madeira</button>
+        <button class="btn" data-theme="sea" role="tab">Mar Azul</button>
+        <button class="btn ghost" id="printBtn" title="Imprimir ou salvar em PDF">Imprimir / PDF</button>
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <!-- Página 1 -->
+    <section class="page" id="page1" aria-label="Página 1 da ficha">
+      <div class="header">
+        <div class="brand" aria-hidden="false">
+          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g fill="none" stroke="#1e1e1e" stroke-width="2" stroke-linecap="round"><circle cx="32" cy="28" r="10" fill="#fffffe"/><circle cx="28" cy="26" r="2" fill="#1e1e1e"/><circle cx="36" cy="26" r="2" fill="#1e1e1e"/><rect x="28" y="30" width="8" height="4" fill="#fffffe"/><line x1="10" y1="54" x2="54" y2="10"/><line x1="10" y1="10" x2="54" y2="54"/></g></svg>
+          <div><h1>Ficha de Personagem · Era dos Piratas</h1><div class="subtitle">Estilo D&D 5e · One Piece (adaptada)</div></div>
+        </div>
+        <div class="muted" id="pageIndicator">Página 1 / 2</div>
+      </div>
+
+      <div class="id-row">
+        <div class="left-col">
+          <div class="section">
+            <span class="section-title">Identificação</span>
+            <div class="grid grid-id" style="margin-top:6px;">
+              <div class="card"><label for="nome">Nome</label><input id="nome" name="nome" type="text"></div>
+              <div class="card"><label for="ocupacao">Ocupação</label><input id="ocupacao" name="ocupacao" type="text"></div>
+              <div class="card"><label for="raca">Raça</label><input id="raca" name="raca" type="text"></div>
+              <div class="card"><label for="nivel">Nível</label><input id="nivel" name="nivel" type="number" min="0" step="1"></div>
+              <div class="card"><label for="exp">EXP</label><input id="exp" name="exp" type="number" min="0" step="1"></div>
+              <div class="card"><label for="maestria">Maestria</label><input id="maestria" name="maestria" type="text"></div>
+            </div>
+          </div>
+
+          <div class="section">
+            <span class="section-title">Status</span>
+            <div class="grid grid-status" style="margin-top:6px;">
+              <div class="card"><label for="ca">CA</label><input id="ca" name="ca" type="number"></div>
+              <div class="card"><label for="iniciativa">Iniciativa</label><input id="iniciativa" name="iniciativa" type="number"></div>
+              <div class="card"><label for="deslocamento">Deslocamento</label><input id="deslocamento" name="deslocamento" type="text" placeholder="ex.: 9 m"></div>
+              <div class="card"><label for="proficiencia">Bônus de Proficiência</label><input id="proficiencia" name="proficiencia" type="number" readonly></div>
+              <div class="card"><label for="pp">Percepção Passiva</label><input id="pp" name="pp" type="number" readonly></div>
+              <div class="card"><label for="inspiracao">Inspiração</label><input id="inspiracao" name="inspiracao" type="text"></div>
+            </div>
+          </div>
+
+          <div class="section">
+            <span class="section-title">Atributos</span>
+            <div class="grid grid-attrs" style="margin-top:6px;">
+              <div class="card"><label for="str">Força</label><input id="str" name="str" type="number"></div>
+              <div class="card"><label for="dex">Destreza</label><input id="dex" name="dex" type="number"></div>
+              <div class="card"><label for="con">Constituição</label><input id="con" name="con" type="number"></div>
+              <div class="card"><label for="int">Inteligência</label><input id="int" name="int" type="number"></div>
+              <div class="card"><label for="wis">Sabedoria</label><input id="wis" name="wis" type="number"></div>
+              <div class="card"><label for="cha">Carisma</label><input id="cha" name="cha" type="number"></div>
+            </div>
+          </div>
+
+          <div class="section">
+            <span class="section-title">Vitalidade</span>
+            <div class="grid grid-two" style="margin-top:6px;">
+              <div class="card"><label for="vida_max">Vida Máxima</label><input id="vida_max" name="vida_max" type="number"></div>
+              <div class="card"><label for="vida_atual">Vida Atual</label><input id="vida_atual" name="vida_atual" type="number"></div>
+            </div>
+          </div>
+
+          <div class="section">
+            <span class="section-title">Recompensas & Economia</span>
+            <div class="grid grid-two" style="margin-top:6px; grid-template-columns: 2fr 1fr;">
+              <div class="card"><label for="wanted">Cartaz (Recompensa)</label><input id="wanted" name="wanted" type="text"></div>
+              <div class="card"><label for="berries">Berries</label><input id="berries" name="berries" type="number"></div>
+            </div>
+            <div class="card" style="margin-top:6px;"><label for="reputacao">Reputação</label><input id="reputacao" name="reputacao" type="text"></div>
+          </div>
+        </div>
+
+        <div class="portrait card" id="portraitCard">
+          <label for="portraitFile" id="portraitLabel" class="muted" style="cursor:pointer">Clique ou pressione Enter para enviar o retrato</label>
+          <input aria-label="Enviar retrato" type="file" id="portraitFile" accept="image/*" style="position:absolute;inset:0;opacity:0;cursor:pointer;" />
+          <img id="portraitImg" alt="Retrato do personagem"/>
+        </div>
+      </div>
+
+      <div class="section">
+        <span class="section-title">Haki</span>
+        <div class="card" style="margin-top:6px;">
+          <div class="checks" role="group" aria-label="Tipos de Haki">
+            <div><input type="checkbox" id="haki_arm" /><label for="haki_arm">Armamento</label></div>
+            <div><input type="checkbox" id="haki_arm_adv" /><label for="haki_arm_adv">Avançado</label></div>
+            <div><input type="checkbox" id="haki_obs" /><label for="haki_obs">Observação</label></div>
+            <div><input type="checkbox" id="haki_obs_adv" /><label for="haki_obs_adv">Avançado</label></div>
+            <div><input type="checkbox" id="haki_rei" /><label for="haki_rei">Rei</label></div>
+          </div>
+          <div style="margin-top:8px;"><label for="tecnicas_haki">Técnicas de Haki</label><textarea id="tecnicas_haki" name="tecnicas_haki" rows="3" placeholder="Anote golpes, usos criativos, condições..."></textarea></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Página 2 -->
+    <section class="page" id="page2" aria-label="Página 2 da ficha">
+      <div class="header">
+        <div class="brand" aria-hidden="true">
+          <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><g fill="none" stroke="#1e1e1e" stroke-width="2" stroke-linecap="round"><circle cx="32" cy="28" r="10" fill="#fffffe"/><circle cx="28" cy="26" r="2" fill="#1e1e1e"/><circle cx="36" cy="26" r="2" fill="#1e1e1e"/><rect x="28" y="30" width="8" height="4" fill="#fffffe"/><line x1="10" y1="54" x2="54" y2="10"/><line x1="10" y1="10" x2="54" y2="54"/></g></svg>
+          <div><h1>Ficha de Personagem · Era dos Piratas</h1><div class="subtitle">Estilo D&D 5e · One Piece (adaptada)</div></div>
+        </div>
+        <div class="muted">Página 2 / 2</div>
+      </div>
+
+      <div class="section">
+        <span class="section-title">Fruta do Diabo</span>
+        <div class="card" style="margin-top:6px;">
+          <div class="grid" style="grid-template-columns: auto 1fr 1fr 1fr; gap:10px; align-items:end;">
+            <div><label for="has_fruit">Possui?</label><input id="has_fruit" name="has_fruit" type="checkbox"></div>
+            <div><label for="nome_fruta">Nome da Fruta</label><input id="nome_fruta" name="nome_fruta" type="text" placeholder="ex.: Gomu Gomu no Mi"></div>
+            <div><label for="tipo_fruta">Tipo</label><select id="tipo_fruta" name="tipo_fruta"><option>Paramecia</option><option>Zoan</option><option>Logia</option></select></div>
+            <div><label for="subtipo_fruta">Subtipo</label><select id="subtipo_fruta" name="subtipo_fruta"><option>Regular</option><option>Antiga</option><option>Mítica</option><option>Mítico (Zoan)</option><option>Rara</option></select></div>
+          </div>
+
+          <div class="grid grid-two" style="margin-top:8px;">
+            <div><label for="poder_chave">Poder‑chave</label><textarea id="poder_chave" name="poder_chave" rows="4" placeholder="O que a fruta faz de principal? Regras e gatilhos."></textarea></div>
+            <div><label for="fraquezas">Fraquezas / Restrições</label><textarea id="fraquezas" name="fraquezas" rows="4" placeholder="Água do mar, Kairoseki, limitações temáticas..."></textarea></div>
+          </div>
+
+          <div class="grid grid-two" style="margin-top:8px;">
+            <div><label for="limite">Limite dramático (cansaço, custos)</label><textarea id="limite" name="limite" rows="3"></textarea></div>
+            <div><label for="tecnicas">Técnicas / Movimentos</label><textarea id="tecnicas" name="tecnicas" rows="3"></textarea></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <span class="section-title">Perícias (5e)</span>
+        <div class="card" style="margin-top:6px;">
+          <div class="skills" id="skillsList" role="list">
+            <!-- As linhas de perícia serão geradas pelo script a partir de um template -->
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <span class="section-title">Equipamentos & Itens</span>
+        <div class="grid grid-two" style="margin-top:6px;">
+          <div class="card"><label for="equipamentos">Equipamentos</label><textarea id="equipamentos" name="equipamentos" rows="7"></textarea></div>
+          <div class="card"><label for="especialidades">Especialidades</label><textarea id="especialidades" name="especialidades" rows="7" placeholder="Especializações, proficiências de ferramentas, veículos, idiomas..."></textarea></div>
+        </div>
+      </div>
+
+      <div class="section">
+        <span class="section-title">Background (Resumo) & Ganchos de Mestre</span>
+        <div class="card" style="margin-top:6px;"><label for="background">Background</label><textarea id="background" name="background" rows="6" placeholder="História breve, laços, objetivos, ganchos para o mestre."></textarea></div>
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="js/ficha.js"></script>
+</body>
+</html>
